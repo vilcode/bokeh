@@ -7,9 +7,9 @@ export class ToggleView extends AbstractButtonView
   render: () ->
     super()
     if @model.active
-      @$el.find('button').addClass("bk-bs-active")
+      @el.querySelector('button').classList.add("bk-bs-active")
     else
-      @$el.find('button').removeClass("bk-bs-active")
+      @el.querySelector('button').classList.remove("bk-bs-active")
     return @
 
   change_input: () ->

@@ -1,6 +1,7 @@
 import * as p from "core/properties"
 
 import {build_views, remove_views} from "core/build_views"
+import {empty} from "core/dom"
 import {Widget, WidgetView} from "./widget"
 import template from "./button_template"
 
@@ -28,17 +29,17 @@ export class AbstractButtonView extends WidgetView
       for own key, val of @icon_views
         val.el.parentNode?.removeChild(val.el)
 
-    @$el.empty()
+    empty(@el)
     html = @template(@model.attributes)
     @el.appendChild(html)
 
-    $button = @$el.find('button')
+    buttonEl = @el.querySelector('button')
 
     if icon?
-      $button.prepend("&nbsp;")
-      $button.prepend(@icon_views[icon.id].$el)
+      buttonEl.insertBefore("&nbsp;", buttonEl.firstChild)
+      buttonEl.insertBefore(@icon_views[icon.id].el, buttonEl.firstChild)
 
-    $button.prop("disabled", @model.disabled)
+    buttonEl.disabled = @model.disabled
 
     return @
 

@@ -2,6 +2,7 @@ import * as $ from "jquery"
 import "bootstrap/dropdown"
 
 import * as p from "core/properties"
+import {a, li} from "core/dom"
 
 import {AbstractButton, AbstractButtonView} from "./abstract_button"
 import template from "./dropdown_template"
@@ -14,28 +15,26 @@ export class DropdownView extends AbstractButtonView
 
     items = []
     for item in @model.menu
-      $item = if item?
+      if item?
         [label, value] = item
-        $a = $("<a data-value='#{value}'>#{label}</a>")
-        that = this
-        $a.click((e) -> that.set_value($(this).data('value')))
-        $('<li></li>').append($a)
+        link = a({}, label)
+        link.dataset.value = value
+        link.click((e) => @set_value(event.currentTarget.dataset.value))
+        itemEl = li({}, link)
       else
-        $('<li class="bk-bs-divider"></li>')
-      items.push($item)
+        itemEl = li({class: "bk-bs-divider"})
+      items.push(itemEl)
 
-    @$el.find('.bk-bs-dropdown-menu').append(items)
-    @$el.find('button').val(@model.default_value)
-    @$el.find('button').dropdown()
+    @el.querySelector('.bk-bs-dropdown-menu').appendChild(items)
+    @el.querySelector('button').value = @model.default_value
+    $(@el.querySelector('button')).dropdown()
     return @
 
   set_value: (value) ->
     # Set the bokeh model to value
     @model.value = value
     # Set the html button value to value
-    @$el.find('button').val(value)
-
-
+    @el.querySelector('button').value = value
 
 export class Dropdown extends AbstractButton
   type: "Dropdown"

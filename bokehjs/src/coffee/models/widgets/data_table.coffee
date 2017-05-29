@@ -16,7 +16,7 @@ export DTINDEX_NAME = "__bkdt_internal_index__"
 
 wait_for_element = (el, fn) ->
   handler = () =>
-    if $.contains(document.documentElement, el)
+    if document.documentElement.contains(el)
       clearInterval(interval)
       fn()
   interval = setInterval(handler, 50)
