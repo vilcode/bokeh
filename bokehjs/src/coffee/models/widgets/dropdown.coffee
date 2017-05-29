@@ -1,5 +1,4 @@
-import * as $ from "jquery"
-import "bootstrap/dropdown"
+import {dropdown} from "bootstrap/dropdown"
 
 import * as p from "core/properties"
 import {a, li} from "core/dom"
@@ -27,7 +26,7 @@ export class DropdownView extends AbstractButtonView
 
     @el.querySelector('.bk-bs-dropdown-menu').appendChild(items)
     @el.querySelector('button').value = @model.default_value
-    $(@el.querySelector('button')).dropdown()
+    dropdown(@el.querySelector('button'))
     return @
 
   set_value: (value) ->
