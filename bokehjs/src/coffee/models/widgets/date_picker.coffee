@@ -19,7 +19,6 @@ export class DatePickerView extends InputWidgetView
       onSelect: @onSelect
     })
     @$el.append([@label, @input])
-    @_prefix_ui()
     return @
 
   onSelect: (dateText, ui) =>
