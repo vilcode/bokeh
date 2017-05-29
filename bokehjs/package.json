@@ -121,7 +121,6 @@
     "@types/hammerjs": "^2.0.33",
 
     "underscore.template": "^0.1.7",
-    "jquery-mousewheel": "^3.1.12",
 
     "numbro": "https://github.com/bokeh/numbro.git#e1b6c52",
     "kiwi": "https://github.com/bokeh/kiwi.git#6941045",
